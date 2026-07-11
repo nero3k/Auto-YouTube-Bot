@@ -20,3 +20,10 @@ ydl_opts = {
         'outtmpl': 'input.mp4',
         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
     }
+import yt_dlp
+import os
+
+# هاد الكود كياخد الكوكيز من البلاصة السرية
+cookies = os.getenv("COOKIES")
+with open("cookies.txt", "w") as f:
+    f.write(cookies)
