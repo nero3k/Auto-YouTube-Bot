@@ -1,24 +1,17 @@
 import yt_dlp
+import os
 
-def scrape_channel_shorts(channel_url):
+def process_video(url):
+    # 1. التحميل
     ydl_opts = {
-        'quiet': False,
-        'extract_flat': True,
-        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
+        'outtmpl': 'input.mp4',
     }
-    
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        try:
-            print(f"جاري البحث في: {channel_url}")
-            # كنضيفو /shorts باش يوتيوب تعطينا غير الفيديوهات القصيرة
-            info = ydl.extract_info(channel_url + "/shorts", download=False)
-            
-            for video in info.get('entries', []):
-                print(f"Title: {video.get('title')}")
-                print(f"URL: https://www.youtube.com/watch?v={video.get('id')}")
-                print("-" * 30)
-        except Exception as e:
-            print(f"وقع خطأ: {e}")
+        ydl.download([url])
+    
+    # 2. التقطاع (كيقطع 30 ثانية الأولى)
+    os.system("ffmpeg -i input.mp4 -ss 00:00:10 -t 30 -c copy output_short.mp4")
 
-# الرابط ديال القناة اللي عطيتيني
-scrape_channel_shorts("https://youtube.com/@swi-n2o")
+# حط هنا الرابط ديال الفيديو اللي بغيتي تقطع
+process_video("https://www.youtube.com/watch?v=Rb5L_kagUZ4")
