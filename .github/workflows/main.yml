@@ -1,37 +1,10 @@
-name: YouTube Automation
-on:
-  schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+name: Auto YouTube Bot
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-      
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install yt-dlp
-      
-      - name: Run script
-        run: python main.py
 on:
   schedule:
     - cron: '0 12 * * *'
   workflow_dispatch:
-- name: Upload result
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-short-video
-          path: output_short.mp4
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,7 +15,10 @@ jobs:
         with:
           python-version: '3.9'
       - name: Install dependencies
-        run: pip install yt-dlp
+        run: |
+          pip install yt-dlp
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
       - name: Run script
         run: python main.py
       - name: Upload result
