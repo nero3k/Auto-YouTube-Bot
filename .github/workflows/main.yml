@@ -27,3 +27,8 @@ on:
   schedule:
     - cron: '0 12 * * *'
   workflow_dispatch:
+- name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-short-video
+          path: output_short.mp4
