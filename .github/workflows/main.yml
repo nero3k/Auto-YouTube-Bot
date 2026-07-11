@@ -32,3 +32,21 @@ on:
         with:
           name: my-short-video
           path: output_short.mp4
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install yt-dlp
+      - name: Run script
+        run: python main.py
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-short-video
+          path: output_short.mp4
