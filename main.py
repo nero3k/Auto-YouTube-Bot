@@ -1,25 +1,12 @@
-name: YouTube Automation
-on:
-  schedule:
-    - cron: '0 0 * * *' # هادي كتعني يخدم كل نهار مع منتصف الليل
-  workflow_dispatch: # هاد الزر كيخليك تخدم السكريبت يدوياً وقتما بغيتي
+import yt_dlp
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-      
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install yt-dlp
-      
-      - name: Run script
-        run: python main.py
+def download_video(url):
+    ydl_opts = {
+        'format': 'best',
+        'outtmpl': 'video.mp4',
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
+
+# الرابط التجريبي
+download_video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
