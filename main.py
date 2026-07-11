@@ -15,3 +15,8 @@ def process_video(url):
 
 # حط هنا الرابط ديال الفيديو اللي بغيتي تقطع
 process_video("https://www.youtube.com/watch?v=Rb5L_kagUZ4")
+ydl_opts = {
+        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
+        'outtmpl': 'input.mp4',
+        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+    }
