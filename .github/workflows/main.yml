@@ -1,26 +1,13 @@
-name: Auto YouTube Bot
-
+name: Upload to YouTube
 on:
-  workflow_dispatch:
-
+  schedule:
+    - cron: '0 10 * * *' # هاد الكود كيخدم كل نهار مع 10 د الصباح أوتوماتيك
 jobs:
-  build:
+  upload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
+      - uses: actions/checkout@v2
+      - name: Upload to YouTube
         run: |
-          pip install -U yt-dlp
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-      - name: Run script
-        run: python main.py
-      - name: Upload result
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-short-video
-          path: output_short.mp4
+          # هنا كيكون سكربت كيتواصل مع API ديال يوتوب
+          python upload_script.py --file "video.mp4" --title "Speed Funny Moment"
