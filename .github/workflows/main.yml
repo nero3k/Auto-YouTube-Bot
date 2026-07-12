@@ -17,8 +17,6 @@ jobs:
           pip install -U yt-dlp
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-      - name: Create cookies.txt
-        run: echo "${{ secrets.COOKIES }}" > cookies.txt
       - name: Run script
         run: python main.py
       - name: Upload result
