@@ -1,9 +1,9 @@
 name: Auto YouTube Bot
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 12 * * *'
-  workflow_dispatch:
 
 jobs:
   build:
@@ -16,11 +16,9 @@ jobs:
           python-version: '3.9'
       - name: Install dependencies
         run: |
-          pip install yt-dlp
+          pip install -U yt-dlp
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-      - name: Create cookies.txt  # هاد السطر هو اللي خاص
-        run: echo "${{ secrets.COOKIES }}" > cookies.txt
       - name: Run script
         run: python main.py
       - name: Upload result
